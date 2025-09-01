@@ -1,0 +1,55 @@
+<Fragment>
+    <App
+        layout="vertical-full-header"
+        noScrollbarGutters="false"
+        when="{!window.location.hash.includes('/playground')}"
+        var.posts = `{{
+          p2: {
+            title: "Second post!",
+            slug: "second-post",
+            author: "Jon Udell",
+            date: "2025-09-02",
+            image: "blog-page-component.png"
+          },
+          p1: {
+            title: "Welcome to the XMLUI blog!",
+            slug: "welcome-to-the-xmlui-blog",
+            author: "Jon Udell",
+            date: "2025-09-01",
+            image: "blog-page-component.png"
+          }
+        }}`
+        >
+        <AppHeader>
+            <property name="logoTemplate">
+                <Link to="https://xmlui.org/">
+                    <Logo height="$space-8" />
+                </Link>
+            </property>
+            <SpaceFiller />
+        </AppHeader>
+        <NavPanel>
+          <NavLink label="Home" to="/" />
+          <NavLink label="Blog" to="/blog" />
+        </NavPanel>
+        <Pages fallbackPath="/404">
+           <Page url="/">
+             <Text>Test of XMLUI blog</Text>
+           </Page>
+           <Page url="/blog">
+             <BlogOverview posts="{posts}" />
+           </Page>
+           <Page url="/blog/{posts.p1.slug}">
+             <BlogPage post="{posts.p1}" />
+            </Page>
+           <Page url="/blog/{posts.p2.slug}">
+             <BlogPage post="{posts.p2}" />
+            </Page>
+        </Pages>
+
+        <Footer>
+            <ToneSwitch />
+        </Footer>
+    </App>
+    <StandalonePlayground when="{window.location.hash.includes('/playground')}" />
+</Fragment>
