@@ -4,13 +4,12 @@
     <Text>Latest updates, tutorials, and insights for building with XMLUI</Text>
   </Stack>
 
-  <!-- Debug: Show raw posts data -->
-  <Text>Debug - Raw posts:</Text>
-  <Text>{JSON.stringify($props.posts, null, 2)}</Text>
-
-
   <List
-    data="{ $props.posts) }">
+    data="{
+      $props.posts.sort(function(a, b) {
+        return new Date(b.date) - new Date(a.date);
+      })
+    }">
     <VStack gap="$space-1" width="90%">
       <Link to="/blog/{$item.slug}">
         <Text>

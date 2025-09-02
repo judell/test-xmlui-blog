@@ -28,10 +28,6 @@
 
     // Setter function
   window.setBlogSearchEntry = function(key, content) {
-    console.log('Raw content length:', content.length);
-    console.log('Raw content preview:', content.substring(0, 200));
-    console.log('Raw content end:', content.substring(content.length - 200));
-
     window.blogPosts[key] = content;
   };
 

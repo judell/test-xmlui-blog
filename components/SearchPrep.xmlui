@@ -1,11 +1,7 @@
 <Component name="SearchPrep" var.count="{0}">
 
-    <List data="{
-      $props.posts ? Object.keys($props.posts).map(function(key) {
-        return Object.assign({}, $props.posts[key], { key: key });
-      }) : []
-    }">
-        <DataSource when="{count <= Object.keys($props.posts).length}"
+    <List when="{count <= $props.posts.length}" data="{$props.posts}">
+        <DataSource
           url="/blog/{$item.slug}.md"
           onLoaded="(data) => {
             // Set indexing state on first load;
@@ -17,7 +13,7 @@
             console.log('Added to blogPosts:', '/blog/' + $item.slug);
             count++;
 
-            if (window.getBlogSearchCount() >= (Object.keys($props.posts).length)) {
+            if (window.getBlogSearchCount() >= $props.posts.length) {
               window.stopBlogIndexing();
               console.log('Blog indexing complete!');
 

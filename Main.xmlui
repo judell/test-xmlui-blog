@@ -27,7 +27,6 @@
                 </Link>
             </property>
         </AppHeader>
-        <Text> { JSON.stringify(posts) } </Text>
         <NavPanel>
           <NavLink label="Home" to="/" />
           <NavLink label="Blog" to="/blog" />
@@ -41,16 +40,14 @@
              <BlogOverview posts="{posts}" />
            </Page>
            <Page url="/search">
-             <VStack gap="2rem">
-               <SearchPrep posts="{posts}" />
-               <BlogSearch posts="{posts}" searchIndex="{window.getblogPosts()}" />
-             </VStack>
+             <SearchPrep posts="{posts}" />
+             <BlogSearch posts="{posts}" searchIndex="{window.getblogPosts()}" />
            </Page>
-           <Page url="/blog/{posts.p1.slug}">
-             <BlogPage post="{posts.p1}" />
+           <Page url="/blog/{posts[0].slug}">
+             <BlogPage post="{posts[0]}" />
             </Page>
-           <Page url="/blog/{posts.p2.slug}">
-             <BlogPage post="{posts.p2}" />
+           <Page url="/blog/{posts[1].slug}">
+             <BlogPage post="{posts[1]}" />
             </Page>
         </Pages>
 
