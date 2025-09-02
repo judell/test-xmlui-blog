@@ -41,7 +41,10 @@
              <BlogOverview posts="{posts}" />
            </Page>
            <Page url="/search">
-             <SearchIndexer posts="{posts}" />
+             <VStack gap="2rem">
+               <SearchIndexer posts="{posts}" />
+               <BlogSearch posts="{posts}" searchIndex="{window.getblogPosts()}" />
+             </VStack>
            </Page>
            <Page url="/blog/{posts.p1.slug}">
              <BlogPage post="{posts.p1}" />

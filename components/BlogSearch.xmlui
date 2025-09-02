@@ -9,8 +9,8 @@
     <List data="{
       window.searchBlogPosts($props.posts, $props.searchIndex, searchQuery.value)
     }">
-      <VStack gap="0.5rem" padding="1rem" border="1px solid $borderColor" borderRadius="$radius-md">
-        <Link to="/{$item.post.slug}">
+      <VStack>
+        <Link to="/blog/{$item.post.slug}">
           <Heading level="h3" value="{$item.post.title}" />
         </Link>
         <Text value="{$item.context}" />

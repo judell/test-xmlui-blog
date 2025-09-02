@@ -19,21 +19,71 @@
   }
 
   // Initialize blog search data
-  window.blogPlainTextContent = {};
+  window.blogPosts = {};
 
   // Getter function
-  window.getBlogPlainTextContent = function() {
-    return window.blogPlainTextContent;
+  window.getblogPosts = function() {
+    return window.blogPosts;
   };
 
-  // Setter function
+    // Setter function
   window.setBlogSearchEntry = function(key, content) {
-    window.blogPlainTextContent[key] = content;
+    console.log('Raw content length:', content.length);
+    console.log('Raw content preview:', content.substring(0, 200));
+    console.log('Raw content end:', content.substring(content.length - 200));
+
+    window.blogPosts[key] = content;
   };
 
   // Get count function
   window.getBlogSearchCount = function() {
-    return Object.keys(window.blogPlainTextContent).length;
+    return Object.keys(window.blogPosts).length;
+  };
+
+    // Search function that returns filtered results
+  window.searchBlogPosts = function(posts, searchIndex, query) {
+    console.log('Search query:', query);
+    console.log('Search index keys:', Object.keys(searchIndex));
+
+    if (!query || !posts || !searchIndex) return [];
+
+    const results = [];
+    Object.keys(posts).forEach(function(key) {
+      const post = posts[key];
+      const queryLower = query.toLowerCase();
+
+      // Search in title
+      if (post.title.toLowerCase().includes(queryLower)) {
+        results.push({
+          key: key,
+          post: post,
+          matchType: 'title',
+          context: post.title
+        });
+        return;
+      }
+
+      // Search in content
+      const content = searchIndex['/blog/' + post.slug];
+      if (content && content.toLowerCase().includes(queryLower)) {
+        const index = content.toLowerCase().indexOf(queryLower);
+        const start = Math.max(0, index - 100);
+        const end = Math.min(content.length, index + 100);
+        let context = content.substring(start, end);
+
+        if (start > 0) context = '...' + context;
+        if (end < content.length) context = context + '...';
+
+        results.push({
+          key: key,
+          post: post,
+          matchType: 'content',
+          context: context
+        });
+      }
+    });
+
+    return results;
   };
 </script>
 </head>
