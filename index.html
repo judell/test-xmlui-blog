@@ -63,23 +63,30 @@
         return;
       }
 
-      // Search in content
+      // Search in content - find all occurrences
       const content = searchIndex['/blog/' + post.slug];
       if (content && content.toLowerCase().includes(queryLower)) {
-        const index = content.toLowerCase().indexOf(queryLower);
-        const start = Math.max(0, index - 100);
-        const end = Math.min(content.length, index + 100);
-        let context = content.substring(start, end);
+        let searchPos = 0;
+        while (true) {
+          const index = content.toLowerCase().indexOf(queryLower, searchPos);
+          if (index === -1) break; // No more matches
 
-        if (start > 0) context = '...' + context;
-        if (end < content.length) context = context + '...';
+          const start = Math.max(0, index - 100);
+          const end = Math.min(content.length, index + 100);
+          let context = content.substring(start, end);
 
-        results.push({
-          key: key,
-          post: post,
-          matchType: 'content',
-          context: context
-        });
+          if (start > 0) context = '...' + context;
+          if (end < content.length) context = context + '...';
+
+          results.push({
+            key: key,
+            post: post,
+            matchType: 'content',
+            context: context
+          });
+
+          searchPos = index + 1; // Move past this match to find next one
+        }
       }
     });
 
