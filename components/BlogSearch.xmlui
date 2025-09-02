@@ -1,5 +1,5 @@
 <Component name="BlogSearch">
-  <VStack gap="1rem">
+  <VStack gap="$space-4">
     <TextBox
       id="searchQuery"
       placeholder="Search blog posts..."
@@ -9,13 +9,17 @@
     <List data="{
       window.searchBlogPosts($props.posts, $props.searchIndex, searchQuery.value)
     }">
-        <VStack gap="2rem">
+      <VStack gap="$space-2">
         <!-- Post title and link (shown once per post) -->
         <Link to="/blog/{$item.post.slug}">
           <H2 value="{$item.post.title}" />
         </Link>
+
+        <!-- All matches for this post -->
         <List data="{$item.matches}">
-            <Text value="{$item.context}" />
+          <Card>
+            <Text backgroundColor="$color-warn-100" value="{$item.context}" />
+          </Card>
         </List>
       </VStack>
     </List>

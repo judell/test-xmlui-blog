@@ -1,4 +1,4 @@
-<Component name="SearchIndexer" var.count="{0}">
+<Component name="SearchPrep" var.count="{0}">
 
     <List data="{
       $props.posts ? Object.keys($props.posts).map(function(key) {
@@ -24,12 +24,14 @@
             }
           }" />
 
+        <!--
         <Fragment when="{$itemIndex == window.getBlogSearchCount() - 1}">
           <Text preserveLineBreaks="true">
             Indexing done:
             { JSON.stringify(Object.keys(window.getblogPosts()), null, 2) }
           </Text>
         </Fragment>
+        -->
 
     </List>
 
