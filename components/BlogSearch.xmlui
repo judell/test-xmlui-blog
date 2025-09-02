@@ -1,0 +1,20 @@
+<Component name="BlogSearch">
+  <VStack gap="1rem">
+    <TextBox
+      id="searchQuery"
+      placeholder="Search blog posts..."
+      width="100%"
+    />
+
+    <List data="{
+      window.searchBlogPosts($props.posts, $props.searchIndex, searchQuery.value)
+    }">
+      <VStack gap="0.5rem" padding="1rem" border="1px solid $borderColor" borderRadius="$radius-md">
+        <Link to="/{$item.post.slug}">
+          <Heading level="h3" value="{$item.post.title}" />
+        </Link>
+        <Text value="{$item.context}" />
+      </VStack>
+    </List>
+  </VStack>
+</Component>
