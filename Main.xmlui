@@ -26,11 +26,12 @@
                     <Logo height="$space-8" />
                 </Link>
             </property>
-            <SpaceFiller />
         </AppHeader>
+        <!-- <Text>{JSON.stringify(Object.keys(appGlobals))}</Text> -->
         <NavPanel>
           <NavLink label="Home" to="/" />
           <NavLink label="Blog" to="/blog" />
+          <NavLink label="Search" to="/search" />
         </NavPanel>
         <Pages fallbackPath="/404">
            <Page url="/">
@@ -38,6 +39,9 @@
            </Page>
            <Page url="/blog">
              <BlogOverview posts="{posts}" />
+           </Page>
+           <Page url="/search">
+             <SearchIndexer posts="{posts}" />
            </Page>
            <Page url="/blog/{posts.p1.slug}">
              <BlogPage post="{posts.p1}" />

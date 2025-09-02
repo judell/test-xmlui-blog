@@ -1,0 +1,36 @@
+<Component name="SearchIndexer" var.count="{0}">
+
+    <List data="{
+      $props.posts ? Object.keys($props.posts).map(function(key) {
+        return Object.assign({}, $props.posts[key], { key: key });
+      }) : []
+    }">
+        <DataSource when="{count <= Object.keys($props.posts).length}"
+          url="/blog/{$item.slug}.md"
+          onLoaded="(data) => {
+            // Set indexing state on first load;
+            if (window.blogIsIndexing === '') {
+              window.setBlogIndexing();
+            }
+
+            window.setBlogSearchEntry('/blog/' + $item.slug, $item.title + '\n' + data);
+            console.log('Added to blogPlainTextContent:', '/blog/' + $item.slug);
+            count++;
+
+            if (window.getBlogSearchCount() >= (Object.keys($props.posts).length)) {
+              window.stopBlogIndexing();
+              console.log('Blog indexing complete!');
+
+            }
+          }" />
+
+        <Fragment when="{$itemIndex == window.getBlogSearchCount() - 1}">
+          <Text preserveLineBreaks="true">
+            Indexing done:
+            { JSON.stringify(Object.keys(window.getBlogPlainTextContent()), null, 2) }
+          </Text>
+        </Fragment>
+
+    </List>
+
+</Component>

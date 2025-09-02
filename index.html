@@ -4,8 +4,38 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>XMLUI blog test</title>
-  <script src="xmlui/xmlui-with-blog.js"></script>
+  <script src="xmlui/xmlui-standalone.umd.js"></script>
   <script src="xmlui/xmlui-playground.js"></script>
+<script>
+
+  window.blogIsIndexing = '';
+
+  window.setBlogIndexing = function() {
+    window.blogIsIndexing = 'indexing'
+  }
+
+  window.stopBlogIndexing = function() {
+    window.blogIsIndexing = 'done'
+  }
+
+  // Initialize blog search data
+  window.blogPlainTextContent = {};
+
+  // Getter function
+  window.getBlogPlainTextContent = function() {
+    return window.blogPlainTextContent;
+  };
+
+  // Setter function
+  window.setBlogSearchEntry = function(key, content) {
+    window.blogPlainTextContent[key] = content;
+  };
+
+  // Get count function
+  window.getBlogSearchCount = function() {
+    return Object.keys(window.blogPlainTextContent).length;
+  };
+</script>
 </head>
 <body>
 </body>
