@@ -40,27 +40,26 @@
     return Object.keys(window.blogPosts).length;
   };
 
-    // Search function that returns filtered results
+        // Search function that returns filtered results grouped by post
   window.searchBlogPosts = function(posts, searchIndex, query) {
     console.log('Search query:', query);
     console.log('Search index keys:', Object.keys(searchIndex));
 
     if (!query || !posts || !searchIndex) return [];
 
-    const results = [];
+    const postResults = {}; // Group results by post
+
     Object.keys(posts).forEach(function(key) {
       const post = posts[key];
       const queryLower = query.toLowerCase();
+      const postMatches = [];
 
       // Search in title
       if (post.title.toLowerCase().includes(queryLower)) {
-        results.push({
-          key: key,
-          post: post,
+        postMatches.push({
           matchType: 'title',
           context: post.title
         });
-        return;
       }
 
       // Search in content - find all occurrences
@@ -78,9 +77,7 @@
           if (start > 0) context = '...' + context;
           if (end < content.length) context = context + '...';
 
-          results.push({
-            key: key,
-            post: post,
+          postMatches.push({
             matchType: 'content',
             context: context
           });
@@ -88,9 +85,18 @@
           searchPos = index + 1; // Move past this match to find next one
         }
       }
+
+      // Only add posts that have matches
+      if (postMatches.length > 0) {
+        postResults[key] = {
+          key: key,
+          post: post,
+          matches: postMatches
+        };
+      }
     });
 
-    return results;
+    return Object.values(postResults);
   };
 </script>
 </head>

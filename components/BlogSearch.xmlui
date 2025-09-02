@@ -3,17 +3,24 @@
     <TextBox
       id="searchQuery"
       placeholder="Search blog posts..."
-      width="100%"
+      width="15rem"
     />
 
     <List data="{
       window.searchBlogPosts($props.posts, $props.searchIndex, searchQuery.value)
     }">
-      <VStack>
+        <VStack gap="3rem">
+        <!-- Post title and link (shown once per post) -->
         <Link to="/blog/{$item.post.slug}">
           <Heading level="h3" value="{$item.post.title}" />
         </Link>
-        <Text value="{$item.context}" />
+
+        <!-- All matches for this post -->
+        <List data="{$item.matches}">
+          <VStack>
+            <Text value="{$item.context}" />
+          </VStack>
+        </List>
       </VStack>
     </List>
   </VStack>
