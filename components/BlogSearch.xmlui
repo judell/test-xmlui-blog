@@ -9,17 +9,13 @@
     <List data="{
       window.searchBlogPosts($props.posts, $props.searchIndex, searchQuery.value)
     }">
-        <VStack gap="3rem">
+        <VStack gap="2arem">
         <!-- Post title and link (shown once per post) -->
         <Link to="/blog/{$item.post.slug}">
-          <Heading level="h3" value="{$item.post.title}" />
+          <H2 value="{$item.post.title}" />
         </Link>
-
-        <!-- All matches for this post -->
         <List data="{$item.matches}">
-          <VStack>
-            <Text value="{$item.context}" />
-          </VStack>
+            <Text lineHeight=".5" value="{$item.context}" />
         </List>
       </VStack>
     </List>
