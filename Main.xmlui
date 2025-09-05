@@ -24,12 +24,6 @@
 
        <SearchPrep posts="{posts}" />
 
-       <BlogSearch
-         posts="{posts}"
-         searchIndex="{window.getBlogPosts()}"
-       />
-
-
        <NavPanel when="{searchState.value.searchResults.length === 0 || !searchState.value.searchQuery}">
          <NavGroup label="Recent Posts">
            <NavLink label="{posts[0].title}" to="/blog/{posts[0].slug}" />
@@ -37,6 +31,11 @@
          </NavGroup>
        </NavPanel>
 
+
+       <BlogSearch
+         posts="{posts}"
+         searchIndex="{window.getBlogPosts()}"
+       />
 
         <Pages when="{searchState.value.searchResults.length === 0 || !searchState.value.searchQuery}" fallbackPath="/404">
            <Page url="/">
