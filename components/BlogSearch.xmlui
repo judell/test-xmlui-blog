@@ -25,7 +25,7 @@
       <property name="emptyListTemplate">""</property>
       <VStack gap="$space-2">
         <!-- Post title and link (shown once per post) -->
-        <Link to="/blog/{$item.post.slug}" onClick="searchState.update({ searchResults: [], searchQuery: '' }); searchQuery.value = ''">
+        <Link to="/blog/{$item.post.slug}" onClick="searchState.update({ searchResults: [], searchQuery: '' }); searchQuery.setValue('')">
           <H2 value="{$item.post.title}" />
         </Link>
 
