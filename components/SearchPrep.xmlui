@@ -24,7 +24,7 @@
         <Fragment when="{$itemIndex == window.getBlogSearchCount() - 1}">
           <Text preserveLineBreaks="true">
             Indexing done:
-            { JSON.stringify(Object.keys(window.getblogPosts()), null, 2) }
+            { JSON.stringify(Object.keys(window.getBlogPosts()), null, 2) }
           </Text>
         </Fragment>
         -->

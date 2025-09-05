@@ -1,7 +1,5 @@
 <Fragment>
     <App
-        layout="vertical-full-header"
-        noScrollbarGutters="false"
         when="{!window.location.hash.includes('/playground')}"
         var.posts = `{[
           {
@@ -20,28 +18,23 @@
           }
         ]}`
         >
-        <AppHeader>
-            <property name="logoTemplate">
-                <Link to="https://xmlui.org/">
-                    <Logo height="$space-8" />
-                </Link>
-            </property>
-        </AppHeader>
+
+       <SearchPrep posts="{posts}" />
+
+       <BlogSearch posts="{posts}" searchIndex="{window.getBlogPosts()}" />
+
+<!--
         <NavPanel>
           <NavLink label="Home" to="/" />
           <NavLink label="Blog" to="/blog" />
           <NavLink label="Search" to="/search" />
         </NavPanel>
+-->
         <Pages fallbackPath="/404">
            <Page url="/">
-             <Text>Test of XMLUI blog</Text>
-           </Page>
-           <Page url="/blog">
              <BlogOverview posts="{posts}" />
            </Page>
            <Page url="/search">
-             <SearchPrep posts="{posts}" />
-             <BlogSearch posts="{posts}" searchIndex="{window.getblogPosts()}" />
            </Page>
            <Page url="/blog/{posts[0].slug}">
              <BlogPage post="{posts[0]}" />
