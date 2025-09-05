@@ -21,7 +21,10 @@
 
        <SearchPrep posts="{posts}" />
 
-       <BlogSearch posts="{posts}" searchIndex="{window.getBlogPosts()}" />
+       <BlogSearch
+         posts="{posts}"
+         searchIndex="{window.getBlogPosts()}"
+       />
 
 <!--
         <NavPanel>

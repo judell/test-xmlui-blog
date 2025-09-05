@@ -6,9 +6,10 @@
       width="15rem"
     />
 
-    <List data="{
-      window.searchBlogPosts($props.posts, $props.searchIndex, searchQuery.value)
-    }">
+    <List
+      data="{ window.searchBlogPosts($props.posts, $props.searchIndex, searchQuery.value) }"
+    >
+      <property name="emptyListTemplate">""</property>
       <VStack gap="$space-2">
         <!-- Post title and link (shown once per post) -->
         <Link to="/blog/{$item.post.slug}">
