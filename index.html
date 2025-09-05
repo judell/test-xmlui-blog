@@ -29,9 +29,78 @@
     return window.blogPosts;
   };
 
-    // Setter function
+      // Markdown to plain text conversion function
+  function markdownToPlainText(markdown) {
+    let cleanedText = markdown;
+
+    // Remove HTML/XML tags first
+    cleanedText = cleanedText.replace(/<[^>]*>/g, '');
+
+    // Remove headers
+    cleanedText = cleanedText.replace(/#{1,6}\s+/g, '');
+
+    // Remove bold/italic
+    cleanedText = cleanedText.replace(/\*\*(.*?)\*\*/g, '$1');
+    cleanedText = cleanedText.replace(/\*(.*?)\*/g, '$1');
+
+    // Remove inline code
+    cleanedText = cleanedText.replace(/`(.*?)`/g, '$1');
+
+    // Remove code blocks
+    cleanedText = cleanedText.replace(/```[\s\S]*?```/g, '');
+
+    // Remove links, keep text
+    cleanedText = cleanedText.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+
+    // Remove images, keep alt text
+    cleanedText = cleanedText.replace(/!\[([^\]]*)\]\([^)]+\)/g, '$1');
+
+    // Remove admonition tags
+    cleanedText = cleanedText.replace(/\\?\[!\w+\]\s*/g, "");
+
+    // Remove anchor tags
+    cleanedText = cleanedText.replace(/\s*\\\[#.*?\]/g, "");
+
+    // Process tables
+    const lines = cleanedText.split("\n");
+    const reformattedLines = lines.map((line) => {
+      const trimmedLine = line.trim();
+
+      // Remove table separators
+      if (trimmedLine.match(/^\|(?:\s*---\s*\|)+$/)) {
+        return null;
+      }
+
+      // Reformat table rows
+      if (trimmedLine.startsWith("|") && trimmedLine.endsWith("|")) {
+        return trimmedLine
+          .slice(1, -1)
+          .split("|")
+          .map((cell) => cell.trim())
+          .join(" - ");
+      }
+
+      // Remove code block markers
+      if (trimmedLine.startsWith("```") || trimmedLine.startsWith("---")) {
+        return null;
+      }
+
+      return line;
+    });
+
+    cleanedText = reformattedLines.filter((line) => line !== null).join("\n");
+
+    // Normalize line breaks
+    cleanedText = cleanedText.replace(/(\r\n|\n){3,}/g, "\n\n");
+
+    return cleanedText.trim();
+  }
+
+  // Setter function
   window.setBlogSearchEntry = function(key, content) {
-    window.blogPosts[key] = content;
+    // Strip markdown to create clean plain text for search
+    const plainText = markdownToPlainText(content);
+    window.blogPosts[key] = plainText;
   };
 
   // Get count function
