@@ -19,6 +19,8 @@
         ]}`
         >
 
+       <AppState id="searchState" bucket="searchState" initialValue="{{ searchResults: [], searchQuery: '' }}" />
+
        <SearchPrep posts="{posts}" />
 
        <BlogSearch
@@ -26,14 +28,8 @@
          searchIndex="{window.getBlogPosts()}"
        />
 
-<!--
-        <NavPanel>
-          <NavLink label="Home" to="/" />
-          <NavLink label="Blog" to="/blog" />
-          <NavLink label="Search" to="/search" />
-        </NavPanel>
--->
-        <Pages fallbackPath="/404">
+
+        <Pages when="{searchState.value.searchResults.length === 0 || !searchState.value.searchQuery}" fallbackPath="/404">
            <Page url="/">
              <BlogOverview posts="{posts}" />
            </Page>

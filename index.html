@@ -22,6 +22,8 @@
   // Initialize blog search data
   window.blogPosts = {};
 
+  window.searchResults = {};
+
   // Getter function
   window.getBlogPosts = function() {
     return window.blogPosts;
@@ -37,12 +39,21 @@
     return Object.keys(window.blogPosts).length;
   };
 
+  window.getBlogSearchResults = function() {
+    return window.searchResults();
+  }
+
+  window.setBlogSearchResults = function(results) {
+    window.searchResults = results;
+  };
+
+
         // Search function that returns filtered results grouped by post
   window.searchBlogPosts = function(posts, searchIndex, query) {
     console.log('Search query:', query);
     console.log('Search index keys:', Object.keys(searchIndex));
 
-    if (!query || !posts || !searchIndex) return [];
+    if (!query || query.trim().length === 0 || !posts || !searchIndex) return [];
 
     const postResults = {}; // Group results by post
 
@@ -98,6 +109,8 @@
         };
       }
     });
+
+    window.setBlogSearchResults(postResults);
 
     return Object.values(postResults);
   };

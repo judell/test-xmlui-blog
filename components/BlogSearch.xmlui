@@ -1,18 +1,31 @@
 <Component name="BlogSearch">
+  <AppState id="searchState" bucket="searchState" />
   <VStack gap="$space-4">
     <TextBox
       id="searchQuery"
       placeholder="Search blog posts..."
       width="15rem"
+      onDidChange="{
+        console.log('TextBox value:', JSON.stringify(searchQuery.value));
+        console.log('TextBox length:', searchQuery.value.length);
+        const results = window.searchBlogPosts($props.posts, $props.searchIndex, searchQuery.value);
+        console.log('Search results length:', results.length);
+        searchState.update({
+          searchResults: results,
+          searchQuery: searchQuery.value
+        });
+      }"
     />
 
+    <Text value="Search results: {(searchState.value.searchResults || []).length}" />
+
     <List
-      data="{ window.searchBlogPosts($props.posts, $props.searchIndex, searchQuery.value) }"
+      data="{searchState.value.searchResults || []}"
     >
       <property name="emptyListTemplate">""</property>
       <VStack gap="$space-2">
         <!-- Post title and link (shown once per post) -->
-        <Link to="/blog/{$item.post.slug}">
+        <Link to="/blog/{$item.post.slug}" onClick="searchState.update({ searchResults: [], searchQuery: '' }); searchQuery.value = ''">
           <H2 value="{$item.post.title}" />
         </Link>
 
