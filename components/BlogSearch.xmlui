@@ -17,7 +17,9 @@
       }"
     />
 
+<!--
     <Text value="Search results: {(searchState.value.searchResults || []).length}" />
+-->
 
     <List
       data="{searchState.value.searchResults || []}"
