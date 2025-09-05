@@ -22,19 +22,21 @@
 
        <AppState id="searchState" bucket="searchState" initialValue="{{ searchResults: [], searchQuery: '' }}" />
 
-       <NavPanel>
-         <NavGroup label="Recent Posts">
-           <NavLink label="{posts[0].title}" to="/blog/{posts[0].slug}" />
-           <NavLink label="{posts[1].title}" to="/blog/{posts[1].slug}" />
-         </NavGroup>
-       </NavPanel>
-
        <SearchPrep posts="{posts}" />
 
        <BlogSearch
          posts="{posts}"
          searchIndex="{window.getBlogPosts()}"
        />
+
+
+       <NavPanel when="{searchState.value.searchResults.length === 0 || !searchState.value.searchQuery}">
+         <NavGroup label="Recent Posts">
+           <NavLink label="{posts[0].title}" to="/blog/{posts[0].slug}" />
+           <NavLink label="{posts[1].title}" to="/blog/{posts[1].slug}" />
+         </NavGroup>
+       </NavPanel>
+
 
         <Pages when="{searchState.value.searchResults.length === 0 || !searchState.value.searchQuery}" fallbackPath="/404">
            <Page url="/">
