@@ -7,8 +7,8 @@
             title: "Welcome to the XMLUI blog!",
             slug: "welcome-to-the-xmlui-blog",
             author: "Jon Udell",
-            date: "2025-09-01",
-            image: "blog-page-component.png"
+            date: "2025-09-10",
+            image: "blog-scrabble.png"
           },
           {
             title: "Lorem Ipsum!",
@@ -32,6 +32,7 @@
        </NavPanel>
 
 
+      <VStack>
        <BlogSearch
          posts="{posts}"
          searchIndex="{window.getBlogPosts()}"
@@ -50,6 +51,7 @@
              <BlogPage post="{posts[1]}" />
             </Page>
         </Pages>
+        </VStack>
 
         <Footer>
             <ToneSwitch />
