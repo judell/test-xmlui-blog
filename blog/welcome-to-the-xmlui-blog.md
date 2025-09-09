@@ -112,7 +112,7 @@ So far the post content exists only as the `content` property passed to the `Blo
       slug: "welcome-to-the-xmlui-blog",
       author: "Jon Udell",
       date: "2025-09-01",
-      image: "blog-page-component.png"
+      image: "blog-scrabble.png"
     },
     {
       title: "Lorem Ipsum!",
@@ -154,7 +154,7 @@ So far the post content exists only as the `content` property passed to the `Blo
 </Component>
 ```
 
-Now we write post metadata as an App-level variable, and create Markdown files corresponding to the slugs. In this case the files are `welcome-to-the-xmlui-blog.md` (this post) and `lorem-ipsum.png` (a dummy older post). We also add a hero image for each post.
+Now we write post metadata as an App-level variable, and create Markdown files corresponding to the slugs. In this case the files are `welcome-to-the-xmlui-blog.md` (this post) and `lorem-ipsum.md` (a dummy older post). We also add a hero image for each post.
 
 ```xmlui copy
 <App
@@ -212,6 +212,8 @@ And the `Page` passes the complete post object to `BlogPage`. In v1 we used the 
   </VStack>
 </Component>
 ```
+
+
 
 ## Create the overview page
 
@@ -287,11 +289,13 @@ Suppose you wanted to decouple the blog engine from the monorepo and use it stan
 │   └── welcome-to-the-xmlui-blog.md
 ├── components
 │   ├── BlogOverview.xmlui
-│   ├── BlogPage.xmlui
+│   └── BlogPage.xmlui
 ├── index.html
+├── resources
+│   └── pg-popout.svg
 └── xmlui
-    ├── xmlui-playground.js
-    └── xmlui-standalone.umd.js
+    ├── xmlui-playground.js
+    └── xmlui-0.10.8.js
 ```
 
 Here's the `index.html`.
@@ -303,7 +307,7 @@ Here's the `index.html`.
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>XMLUI blog test</title>
-  <script src="xmlui/xmlui-standalone.umd.js"></script>
+  <script src="xmlui/xmlui-0.10.8.js"></script>
   <script src="xmlui/xmlui-playground.js"></script>
 <script>
 </script>

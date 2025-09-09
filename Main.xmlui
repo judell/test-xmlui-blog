@@ -38,7 +38,7 @@
          searchIndex="{window.getBlogPosts()}"
        />
 
-        <Pages when="{searchState.value.searchResults.length === 0 || !searchState.value.searchQuery}" fallbackPath="/404">
+        <Pages when="{searchState.value.searchResults.length === 0 || !searchState.value.searchQuery}">
            <Page url="/">
              <BlogOverview posts="{posts}" />
            </Page>
