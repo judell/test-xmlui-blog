@@ -24,7 +24,7 @@
 
        <SearchPrep posts="{posts}" />
 
-       <NavPanel when="{searchState.value.searchResults.length === 0 || !searchState.value.searchQuery}">
+       <NavPanel when="{ mediaSize.sizeIndex > 2 && (searchState.value.searchResults.length === 0 || !searchState.value.searchQuery)}">
          <NavGroup label="Recent Posts">
            <NavLink label="{posts[0].title}" to="/blog/{posts[0].slug}" />
            <NavLink label="{posts[1].title}" to="/blog/{posts[1].slug}" />
