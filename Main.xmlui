@@ -1,61 +1,62 @@
-<Fragment>
-    <App
-        when="{!window.location.hash.includes('/playground')}"
-        layout="vertical"
-        var.posts = `{[
-          {
-            title: "Welcome to the XMLUI blog!",
-            slug: "welcome-to-the-xmlui-blog",
-            author: "Jon Udell",
-            date: "2025-09-10",
-            image: "blog-scrabble.png"
-          },
-          {
-            title: "Lorem Ipsum!",
-            slug: "lorem-ipsum",
-            author: "H. Rackham",
-            date: "1914-06-03",
-            image: "lorem-ipsum.png"
-          }
-        ]}`
-        >
-
-       <AppState id="searchState" bucket="searchState" initialValue="{{ searchResults: [], searchQuery: '' }}" />
-
-       <SearchPrep posts="{posts}" />
-
-       <NavPanel when="{ mediaSize.sizeIndex > 2 && (searchState.value.searchResults.length === 0 || !searchState.value.searchQuery)}">
-         <NavGroup label="Recent Posts">
-           <NavLink label="{posts[0].title}" to="/blog/{posts[0].slug}" />
-           <NavLink label="{posts[1].title}" to="/blog/{posts[1].slug}" />
-         </NavGroup>
-       </NavPanel>
-
-
-      <VStack>
-       <BlogSearch
-         posts="{posts}"
-         searchIndex="{window.getBlogPosts()}"
-       />
-
-        <Pages when="{searchState.value.searchResults.length === 0 || !searchState.value.searchQuery}">
-           <Page url="/">
-             <BlogOverview posts="{posts}" />
-           </Page>
-           <Page url="/search">
-           </Page>
-           <Page url="/blog/{posts[0].slug}">
-             <BlogPage post="{posts[0]}" />
-            </Page>
-           <Page url="/blog/{posts[1].slug}">
-             <BlogPage post="{posts[1]}" />
-            </Page>
-        </Pages>
-        </VStack>
-
-        <Footer>
+<App
+    layout="vertical"
+    var.showNavPanelThreshold="{6}"
+    var.posts=`{[
+      {
+        title: "Welcome to the XMLUI blog!",
+        slug: "welcome-to-the-xmlui-blog",
+        author: "Jon Udell",
+        date: "2025-10-20",
+        image: "blog-scrabble.png"
+      }
+    ]}`>
+    <AppState
+        id="navState"
+        initialValue="{{
+            showNavPanel: showNav(),
+            showNavPanelThreshold: showNavPanelThreshold,
+            posts: posts.length
+        }}" />
+    <AppHeader>
+        <property name="logoTemplate">
+          <CHStack height="$space-6">
+            <Logo />
+            <Text variant="em">Tutorials, tips, best practices</Text>
+          </CHStack>
+        </property>
+        <property name="profileMenuTemplate">
+            <SpaceFiller />
+            <Link when="{!['/', '/blog'].includes($pathname)}" to="/">
+                <Button height="$space-6" padding="$space-2" label="All Posts" />
+            </Link>
+        </property>
+    </AppHeader>
+    <NavPanel>
+       <NavGroup label="Recent posts" to="/blog">
+            <NavLink
+                label="Welcome to the XMLUI blog!"
+                to="/blog/{posts[0].slug}" />
+        </NavGroup>
+    </NavPanel>
+    <Pages fallbackPath="/404">
+        <Page url="/">
+            <BlogOverview posts="{posts}" />
+        </Page>
+        <Page url="/blog">
+            <BlogOverview posts="{posts}" />
+        </Page>
+        <Page url="/blog/{posts[0].slug}">
+            <BlogPage post="{posts[0]}" />
+        </Page>
+        <Page url="/404">
+            <PageNotFound />
+        </Page>
+    </Pages>
+    <Footer>
+        <CHStack width="100%">
+            This site is an XMLUI™ app.
+            <SpaceFiller />
             <ToneSwitch />
-        </Footer>
-    </App>
-    <StandalonePlayground when="{window.location.hash.includes('/playground')}" />
-</Fragment>
+        </CHStack>
+    </Footer>
+</App>
