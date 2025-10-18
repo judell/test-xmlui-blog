@@ -1,0 +1,6 @@
+{
+  "name": "Test XMLUI Blog",
+  "appGlobals": {
+    "useHashBasedRouting": false
+  }
+}
