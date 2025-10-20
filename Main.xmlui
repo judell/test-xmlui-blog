@@ -1,16 +1,32 @@
 <App
+    codeBehind="./Main.xmlui.xs"
     layout="vertical"
-    var.showNavPanelThreshold="{6}"
+    var.showNavPanelThreshold="{0}"
     var.posts=`{[
       {
         title: "Welcome to the XMLUI blog!",
         slug: "welcome-to-the-xmlui-blog",
+        description: "In our inaugural blog post we show how to build a simple blog engine with XMLUI.",
         author: "Jon Udell",
         date: "2025-10-20",
         image: "blog-scrabble.png"
+      },
+      {
+        title: "Lorem ipsum",
+        description: "This is ancient history",
+        slug: "lorem-ipsum",
+        author: "H. Rackham",
+        date: "1914-06-12",
+        image: "lorem-ipsum.png"
       }
     ]}`>
-    <Button variant="ghost" label="toggle threshold" padding="$space-1" onClick="toggleThreshold()" />
+    <!--
+    <HStack verticalAlignment="center">
+        <Button variant="ghost" label="toggle showNav" onClick="toggleThreshold()" />
+        <Text>{showNav()}</Text>
+    </HStack>
+    -->
+    <Logo />
     <AppState
         id="navState"
         initialValue="{{
@@ -20,23 +36,20 @@
         }}" />
     <AppHeader>
         <property name="logoTemplate">
-          <CHStack height="$space-6">
-            <Logo />
-          </CHStack>
+          <Logo />
         </property>
         <property name="profileMenuTemplate">
             <Text variant="em">Tutorials, tips, best practices</Text>
-            <SpaceFiller />
-            <Link when="{!['/', '/blog'].includes($pathname)}" to="/">
-                <Button height="$space-6" padding="$space-2" label="All Posts" />
-            </Link>
         </property>
     </AppHeader>
-    <NavPanel when="{showNav()}" >
+    <NavPanel when="{showNav()}">
        <NavGroup label="Recent posts" to="/blog">
             <NavLink
                 label="Welcome to the XMLUI blog!"
                 to="/blog/{posts[0].slug}" />
+            <NavLink
+                label="Lorem Ipsum"
+                to="/blog/{posts[1].slug}" />
         </NavGroup>
     </NavPanel>
     <Pages fallbackPath="/404">
@@ -49,15 +62,15 @@
         <Page url="/blog/{posts[0].slug}">
             <BlogPage post="{posts[0]}" />
         </Page>
-        <Page url="/404">
-            <PageNotFound />
+        <Page url="/blog/{posts[1].slug}">
+            <BlogPage post="{posts[1]}" />
         </Page>
     </Pages>
     <Footer>
-        <CHStack width="100%">
+        <HStack width="100%">
             This site is an XMLUI™ app.
             <SpaceFiller />
             <ToneSwitch />
-        </CHStack>
+        </HStack>
     </Footer>
 </App>

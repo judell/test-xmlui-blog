@@ -1,27 +1,37 @@
 <Component name="BlogOverview">
-  <Debug />
-  <CVStack>
-    <VStack width="100%">
-      <List  data="{
-      $props.posts.sort(function(a, b) {
-        return new Date(b.date) - new Date(a.date);
-      })
-    }">
-        <VStack gap="$space-2">
-          <Link to="/blog/{$item.slug}">
-            <Text fontSize="larger">
-              {$item.title}
-            </Text>
-          </Link>
-          <Text>
-            {$item.date} • {$item.author}
+  <Theme
+    marginTop-H1-blog-header="$space-1_5"
+    fontSize-Text-blog-attribution="$fontSize-xs"
+    fontStyle-Text-blog-attribution="italic"
+    marginTop-Text-blog-attribution="$space-1"
+  >
+    <Stack marginLeft="10%" marginRight="10%">
+      <List
+        data="{
+        $props.posts.sort(function(a, b) {
+          return new Date(b.date) - new Date(a.date);
+        })
+      }">
+        <VStack gap="0" marginBottom="$space-10">
+          <Image src="/blog/images/{$item.image}" />
+          <H1 variant="blog-header">
+            {$item.title}
+          </H1>
+          <Text variant="blog-description">
+            {$item.description}
           </Text>
-          <Link to="/blog/{$item.slug}">
-            <Image src="/blog/images/{$item.image}" />
-          </Link>
-          <Stack height="$space-8" />
+          <HStack>
+            <Text variant="blog-attribution">
+              {$item.author}
+            </Text>
+            <SpaceFiller />
+            <Text variant="blog-attribution" fontSize="$fontSize-xs">
+              {$item.date}
+            </Text>
+          </HStack>
+          <ContentSeparator />
         </VStack>
       </List>
-    </VStack>
-  </CVStack>
+    </Stack>
+  </Theme>
 </Component>

@@ -1,9 +1,13 @@
 <Component name="BlogPage">
-    <Debug />
-    <VStack gap="0">
-      <H1>{$props.post.title}</H1>
-      <Text>{$props.post.date} • {$props.post.author}</Text>
-    </VStack>
+  <Stack marginLeft="10%" marginRight="10%">
+    <Link fontSize="$fontSize-xs" textDecorationLine="none" label="← All posts" to="/blog" />
+    <H1>
+      {$props.post.title}
+    </H1>
+    <Text>
+      {$props.post.date} • {$props.post.author}
+    </Text>
     <Image src="/blog/images/{$props.post.image}" />
     <Markdown marginTop="$space-4" data="/blog/{$props.post.slug}.md" />
+  </Stack>
 </Component>
