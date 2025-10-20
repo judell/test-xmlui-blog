@@ -1,10 +1,13 @@
 <Component name="BlogOverview">
   <Theme
-    marginTop-H1-blog-header="$space-1_5"
-    fontSize-Text-blog-attribution="$fontSize-xs"
+    marginTop-H1-blog-header="$space-4"
+    lineHeight-H1-blog-header="$space-6"
+    marginTop-Text-blog-description="$space-2"
+    lineHeight-Text-blog-description="1.2rem"
     fontStyle-Text-blog-attribution="italic"
-    marginTop-Text-blog-attribution="$space-1"
-  >
+    marginTop-Text-blog-attribution="$space-1_5"
+    margin-Bottom-blog-attribution="$space-8"
+    >
     <Stack marginLeft="10%" marginRight="10%">
       <List
         data="{
@@ -12,25 +15,27 @@
           return new Date(b.date) - new Date(a.date);
         })
       }">
-        <VStack gap="0" marginBottom="$space-10">
-          <Image src="/blog/images/{$item.image}" />
-          <H1 variant="blog-header">
-            {$item.title}
-          </H1>
-          <Text variant="blog-description">
-            {$item.description}
-          </Text>
-          <HStack>
-            <Text variant="blog-attribution">
-              {$item.author}
+          <VStack gap="0" marginBottom="$space-10">
+            <Link to="/blog/{$item.slug}">
+            <Image src="/blog/images/{$item.image}" />
+            </Link>
+            <H1 variant="blog-header">
+              {$item.title}
+            </H1>
+            <Text variant="blog-description">
+              {$item.description}
             </Text>
-            <SpaceFiller />
-            <Text variant="blog-attribution" fontSize="$fontSize-xs">
-              {$item.date}
-            </Text>
-          </HStack>
-          <ContentSeparator />
-        </VStack>
+            <HStack>
+              <Text variant="blog-attribution">
+                {$item.author}
+              </Text>
+              <SpaceFiller />
+              <Text variant="blog-attribution">
+                {$item.date}
+              </Text>
+            </HStack>
+            <ContentSeparator when="{$itemIndex+1 < $props.posts.length}" marginTop=".5rem"/>
+          </VStack>
       </List>
     </Stack>
   </Theme>
