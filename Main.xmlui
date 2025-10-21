@@ -1,7 +1,7 @@
 <App
     codeBehind="./Main.xmlui.xs"
-    layout="vertical"
-    var.showNavPanelThreshold="{0}"
+    layout="vertical-full-header"
+    var.showNavPanelThreshold="{6}"
     var.posts=`{[
       {
         title: "Welcome to the XMLUI blog!",
@@ -42,7 +42,7 @@
             <Text variant="em">Tutorials, tips, best practices</Text>
         </property>
     </AppHeader>
-    <NavPanel when="{showNav()}">
+    <NavPanel when="{false}">
        <NavGroup label="Recent posts" to="/blog">
             <NavLink
                 label="Welcome to the XMLUI blog!"

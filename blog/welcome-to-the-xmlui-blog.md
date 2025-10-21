@@ -4,9 +4,9 @@ In this inaugural post we'll explore the development of the blog engine we're us
 
 We started with the simplest possible approach: post metadata and data as literal strings.
 
-```xmlui-pg name="XMLUI blog v1"
+```xmlui-pg name="XMLUI blog v1" height="200px"
 ---app
-<App layout="vertical">
+<App layout="vertical-full-header">
   <NavPanel>
     <NavGroup label="Blog">
       <NavLink label="Newest post" to="/newest-post" />
