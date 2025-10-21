@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>XMLUI Blog</title>
+    <link>https://blog.xmlui.org</link>
+    <description>Latest updates, tutorials, and insights for XMLUI - the declarative UI framework. Stay informed about new features, best practices, and community highlights.</description>
+    <language>en</language>
+    <lastBuildDate>Thu, 16 Oct 2025 22:58:31 GMT</lastBuildDate>
+
+    <item>
+      <title>Welcome to the XMLUI blog!</title>
+      <link>https://blog.xmlui.org/welcome-to-the-xmlui-blog</link>
+      <description>In this inaugural post we&#39;ll explore the development of the blog engine we&#39;re using on this site. Our tagline is Practical User Interfaces Built Simply and creating this blog couldn&#39;t have been simpler. The whole site, of which the blog is now a part...</description>
+      <pubDate>Wed, 10 Sep 2025 00:00:00 GMT</pubDate>
+      <author>support@xmlui.org (Jon Udell)</author>
+      <guid>https://blog.xmlui.org/welcome-to-the-xmlui-blog</guid>
+    </item>
+  </channel>
+</rss>

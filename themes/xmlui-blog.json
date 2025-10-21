@@ -1,0 +1,7 @@
+{
+  "name": "XMLUI blog",
+  "id": "xmlui-blog",
+  "themeVars": {
+      "maxWidth-Drawer": "20rem"
+  }
+}

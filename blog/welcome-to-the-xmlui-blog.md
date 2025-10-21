@@ -95,7 +95,7 @@ Here's how `BlogPage` assembles data and metadata to create a post.
 
 So far the post content exists only as the `content` property passed to the `BlogPage` component. For the real blog we'll want to manage it as a set of Markdown files. This version enables that.
 
-```xmlui-pg name="XMLUI blog v2"
+```xmlui-pg name="XMLUI blog v2"  height="200px"
 ---app
 <App
   layout="vertical"

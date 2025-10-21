@@ -1,7 +1,6 @@
 <App
-    codeBehind="./Main.xmlui.xs"
     layout="vertical-full-header"
-    var.showNavPanelThreshold="{6}"
+    defaultTheme = "xmlui-blog"
     var.posts=`{[
       {
         title: "Welcome to the XMLUI blog!",
@@ -10,46 +9,23 @@
         author: "Jon Udell",
         date: "2025-10-20",
         image: "blog-scrabble.png"
-      },
-      {
-        title: "Lorem ipsum",
-        description: "This is ancient history",
-        slug: "lorem-ipsum",
-        author: "H. Rackham",
-        date: "1914-06-12",
-        image: "lorem-ipsum.png"
       }
     ]}`>
-    <!--
-    <HStack verticalAlignment="center">
-        <Button variant="ghost" label="toggle showNav" onClick="toggleThreshold()" />
-        <Text>{showNav()}</Text>
-    </HStack>
-    -->
-    <Logo />
-    <AppState
-        id="navState"
-        initialValue="{{
-            showNavPanel: showNav(),
-            showNavPanelThreshold: showNavPanelThreshold,
-            posts: posts.length
-        }}" />
     <AppHeader>
         <property name="logoTemplate">
-          <Logo />
+            <Link to="https://xmlui.org/">
+                <Logo height="$space-8"/>
+            </Link>
         </property>
         <property name="profileMenuTemplate">
-            <Text variant="em">Tutorials, tips, best practices</Text>
+            <Text variant="em">XMLUI Blog: Tutorials, tips, best practices</Text>
         </property>
     </AppHeader>
-    <NavPanel when="{false}">
+    <NavPanel>
        <NavGroup label="Recent posts" to="/blog">
             <NavLink
                 label="Welcome to the XMLUI blog!"
                 to="/blog/{posts[0].slug}" />
-            <NavLink
-                label="Lorem Ipsum"
-                to="/blog/{posts[1].slug}" />
         </NavGroup>
     </NavPanel>
     <Pages fallbackPath="/404">
@@ -62,15 +38,17 @@
         <Page url="/blog/{posts[0].slug}">
             <BlogPage post="{posts[0]}" />
         </Page>
-        <Page url="/blog/{posts[1].slug}">
-            <BlogPage post="{posts[1]}" />
-        </Page>
     </Pages>
     <Footer>
         <HStack width="100%">
-            This site is an XMLUI™ app.
+            <Text>This site is an XMLUI™ app.</Text>
             <SpaceFiller />
             <ToneSwitch />
+            <Image
+              width="$space-6"
+              height="$space-6"
+              onClick="window.location.href = '/feed.rss'"
+              src="/resources/rss.svg" />
         </HStack>
     </Footer>
 </App>
