@@ -6,8 +6,10 @@
         })
       }">
     <VStack
-       var.blogLink="/blog/{$item.slug}"
+       width="85%"
+       marginHorizontal="auto"
        gap="$space-2"
+       var.blogLink="/blog/{$item.slug}"
        onClick="Actions.navigate(blogLink)">
      <Image src="/blog/images/{$item.image}" />
       <H1>
