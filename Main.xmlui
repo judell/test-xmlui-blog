@@ -1,13 +1,14 @@
 <App
     layout="vertical-full-header"
     defaultTheme = "xmlui-blog"
+    noScrollbarGutters
     var.posts=`{[
       {
         title: "Welcome to the XMLUI blog!",
         slug: "welcome-to-the-xmlui-blog",
         description: "In our inaugural blog post we show how to build a simple blog engine with XMLUI.",
         author: "Jon Udell",
-        date: "2025-10-20",
+        date: "2025-10-22",
         image: "blog-scrabble.png"
       }
     ]}`>
@@ -44,11 +45,13 @@
             <Text>This site is an XMLUI™ app.</Text>
             <SpaceFiller />
             <ToneSwitch />
+            <Link to="http://localhost:8000/feed.rss">
             <Image
               width="$space-6"
               height="$space-6"
-              onClick="window.location.href = '/feed.rss'"
+              <!-- onClick="window.location.href = '/feed.rss'" -->
               src="/resources/rss.svg" />
+            </Link>
         </HStack>
     </Footer>
 </App>
